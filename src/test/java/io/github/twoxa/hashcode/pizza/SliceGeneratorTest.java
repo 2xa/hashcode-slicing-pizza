@@ -3,6 +3,8 @@ package io.github.twoxa.hashcode.pizza;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.github.twoxa.hashcode.pizza.Pizza.Ingredient.MUSHROOM;
 import static io.github.twoxa.hashcode.pizza.Pizza.Ingredient.TOMATO;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +20,10 @@ class SliceGeneratorTest {
 
     @Test
     void testApply() {
-        assertNotNull(this.sliceGenerator.apply(samplePizza()));
+        final List<Slice> slices = this.sliceGenerator.apply(samplePizza());
+        assertFalse(slices.isEmpty());
+        //assertEquals(3, slices.size());
+        //assertEquals(Collections.emptyList(), slices);
     }
 
     static Pizza samplePizza() {

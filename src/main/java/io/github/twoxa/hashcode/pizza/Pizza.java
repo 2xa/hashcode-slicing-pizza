@@ -3,13 +3,14 @@ package io.github.twoxa.hashcode.pizza;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
 
 @Data
-public class Pizza {
+public class Pizza implements Predicate<Slice> {
 
     private final int rows;
 
@@ -26,6 +27,11 @@ public class Pizza {
                 .mapToObj(row -> IntStream.range(0, this.columns)
                         .mapToObj(column -> new Cell(row, column, cells[row][column])))
                 .flatMap(identity());
+    }
+
+    @Override
+    public boolean test(Slice slice) {
+        return true;
     }
 
     @Override
