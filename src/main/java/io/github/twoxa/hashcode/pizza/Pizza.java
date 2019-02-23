@@ -1,8 +1,8 @@
 package io.github.twoxa.hashcode.pizza;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -28,15 +28,48 @@ public class Pizza {
                 .flatMap(identity());
     }
 
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "rows=" + rows +
+                ", columns=" + columns +
+                ", minOfType=" + minOfType +
+                ", maxCells=" + maxCells +
+                ", ingredients=\n" + prettyPrintIngredients() +
+                '}';
+    }
+
+    private String prettyPrintIngredients() {
+        StringBuilder result = new StringBuilder();
+        for (Ingredient[] ingredients : cells) {
+            for (Ingredient ingredient : ingredients) {
+                result.append(ingredient);
+            }
+            result.append("\n");
+        }
+        return result.toString();
+    }
 
     @Data
-    public static class Cell {
+    static class Cell {
+
         private final int row;
+
         private final int column;
+
         private final Ingredient ingredient;
     }
 
+    @RequiredArgsConstructor
     public enum Ingredient {
-        MUSHROOM, TOMATO
+        MUSHROOM('M'), TOMATO('T');
+
+        private final char symbol;
+
+        public static Ingredient getBySymbol(char typeSymbol) {
+            if (typeSymbol == 'M') return MUSHROOM;
+            else if (typeSymbol == 'T') return TOMATO;
+            else throw new IllegalArgumentException("Unexpected ingredient.");
+        }
     }
 }
