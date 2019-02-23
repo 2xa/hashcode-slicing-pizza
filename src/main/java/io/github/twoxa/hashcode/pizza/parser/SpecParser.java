@@ -11,23 +11,22 @@ import io.github.twoxa.hashcode.pizza.Pizza;
 class SpecParser {
 
     Pizza parse(String fileName) {
-        Pizza pizza = null;
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             final Iterator<String> lineIterator = stream.iterator();
-            pizza = initPizza(lineIterator.next());
+            Pizza pizza = initPizza(lineIterator.next());
             int rows = 0;
             while (lineIterator.hasNext()) {
                 String types = lineIterator.next();
                 char[] typeSymbols = types.toCharArray();
-                for (int i = 0; i < typeSymbols.length; i++){
+                for (int i = 0; i < typeSymbols.length; i++) {
                     pizza.getCells()[rows][i] = Pizza.Ingredient.getBySymbol(typeSymbols[i]);
                 }
                 rows++;
             }
+            return pizza;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unexpected exception!", e);
         }
-        return pizza;
     }
 
     private Pizza initPizza(String sizes) {
