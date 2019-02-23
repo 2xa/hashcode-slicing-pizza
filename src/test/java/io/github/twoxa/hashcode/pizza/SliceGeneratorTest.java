@@ -3,6 +3,8 @@ package io.github.twoxa.hashcode.pizza;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static io.github.twoxa.hashcode.pizza.Pizza.Ingredient.MUSHROOM;
+import static io.github.twoxa.hashcode.pizza.Pizza.Ingredient.TOMATO;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SliceGeneratorTest {
@@ -25,10 +27,10 @@ class SliceGeneratorTest {
         //TMMMT
         //TTTTT
 
-        final char[][] cells = {
-                {'T', 'T', 'T', 'T', 'T'},
-                {'T', 'M', 'M', 'M', 'T'},
-                {'T', 'T', 'T', 'T', 'T'}};
+        final Pizza.Ingredient[][] cells = {
+                {TOMATO, TOMATO, TOMATO, TOMATO, TOMATO},
+                {TOMATO, MUSHROOM, MUSHROOM, MUSHROOM, TOMATO},
+                {TOMATO, TOMATO, TOMATO, TOMATO, TOMATO}};
         return new Pizza(3, 5, 1, 6, cells);
     }
 }

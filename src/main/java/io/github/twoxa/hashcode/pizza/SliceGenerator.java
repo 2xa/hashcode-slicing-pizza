@@ -8,6 +8,7 @@ public interface SliceGenerator extends Function<Pizza, List<Slice>> {
 
     @Override
     default List<Slice> apply(Pizza pizza) {
+
         return Collections.emptyList();
     }
 }
